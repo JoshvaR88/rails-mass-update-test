@@ -1,0 +1,13 @@
+<h1>Mass Edit</h1>
+
+<%= form_for @book, :url => mass_update_books_path, :method => :put, :builder => MassFormBuilder do |f| %>
+  Editing the following:
+  <ul>
+    <% @books.each do |book| %>
+      <li><%= book.title %><%= hidden_field_tag "ids[]", book.id %></li>
+    <% end %>
+  </ul>
+
+  <%= render 'form_fields', :f => f %>
+<% end %>
+

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Key:</b>
+  <%= @property.key %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @property.value %>
+</p>
+
+<p>
+  <b>Book:</b>
+  <%= @property.book %>
+</p>
+
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>

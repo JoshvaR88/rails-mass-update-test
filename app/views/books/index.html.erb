@@ -1,0 +1,33 @@
+<h1>Listing books</h1>
+
+
+<%= form_tag mass_edit_books_path %>
+<table>
+  <tr>
+    <th>Select</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= check_box_tag "ids[]", book.id %></td>
+      <td><%= book.title %></td>
+      <td><%= book.price %></td>
+      <td><%= link_to 'Show', book %></td>
+      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+      <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<input type="submit" value="Edit Checked">
+
+</form>
+
+<br />
+
+<%= link_to 'New Book', new_book_path %>

@@ -1,0 +1,25 @@
+<div class="field">
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+</div>
+<div class="field">
+  <%= f.label :price %><br />
+  <%= f.number_field :price %>
+</div>
+
+<div>
+  <%= f.fields_for :properties, :builder => ActionView::Helpers::FormBuilder do |builder| %>
+    <div class="field">
+      <%= builder.label :key %>
+      <%= builder.text_field :key %>
+    </div>
+    <div class="field">
+      <%= builder.label :value %>
+      <%= builder.text_field :value %>
+    </div>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
