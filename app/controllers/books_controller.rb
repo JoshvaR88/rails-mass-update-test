@@ -78,18 +78,8 @@ class BooksController < ApplicationController # GET /books # GET /books.json
   end
 
   def mass_update
-    @books = Book.find(params[:ids])
+    Book.mass_update(params)
 
-    # Remove params with blank values
-    params[:book].delete_if {|k,v| v.empty?}
-
-    # Remove params that require uniqueness
-    params[:book].delete_if {|k,v| Book.validators_on(k).any? { |v| v.kind_of? ActiveRecord::Validations::UniquenessValidator }}
-
-    @books.each do |book|
-      book.update_attributes(params[:book])
-    end
-    
     redirect_to books_path, :notice => "Books updated!"
   end
 
