@@ -11,3 +11,15 @@
   <%= render 'form_fields', :f => f %>
 <% end %>
 
+<script>
+  $('input[type="checkbox"][name="_enable"]').change(function() {
+    var checkbox = $(this);
+    var field = $("#" + checkbox.val())
+    if (checkbox.prop('checked')) {
+      field.removeAttr("disabled");
+    } else {
+      field.attr("disabled", "disabled");
+    }
+  });
+</script>
+  
