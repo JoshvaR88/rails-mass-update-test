@@ -1,7 +1,8 @@
 class Book < ActiveRecord::Base
-  attr_accessible :price, :title, :notes, :properties_attributes
+  attr_accessible :price, :title, :author, :notes, :properties_attributes
 
-  validates :title, :uniqueness => true
+  validates :title, :uniqueness => true, :presence => true
+  validates :price, :presence => true
 
   has_many :properties
 
@@ -10,7 +11,6 @@ class Book < ActiveRecord::Base
   def self.mass_update(params)
     books = find(params[:ids])
 
-    #params[:book].delete_if {|k,v| v.empty?}
     params[:book].delete_if {|k,v| Book.validators_on(k).any? { |v| v.kind_of? ActiveRecord::Validations::UniquenessValidator }}
 
     book_params = params[:book].except(:properties_attributes)

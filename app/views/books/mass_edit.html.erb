@@ -12,14 +12,25 @@
 <% end %>
 
 <script>
-  $('input[type="checkbox"][name="_enable"]').change(function() {
+  $('input[type="checkbox"][name="_null"]').change(function() {
     var checkbox = $(this);
-    var field = $("#" + checkbox.val())
+    var field_name = checkbox.val();
+    var field = $('[type!="hidden"][id="' + field_name + '"]');
+    var hidden_field = $('input[type="hidden"][id="' + field_name + '"]');
+
     if (checkbox.prop('checked')) {
-      field.removeAttr("disabled");
-    } else {
       field.attr("disabled", "disabled");
+      hidden_field.removeAttr("disabled");
+    } else {
+      field.removeAttr("disabled");
+      hidden_field.attr("disabled", "disabled");
     }
+  });
+
+  $('#new_book').submit(function() {
+    // Disable any empty, non-hidden, enabled fields before submitting
+    fields = $('#new_book :input[type!="hidden"][disabled!="disabled"]').filter(function() { return $(this).val() == ""; });
+    fields.attr("disabled", "disabled");
   });
 </script>
   
